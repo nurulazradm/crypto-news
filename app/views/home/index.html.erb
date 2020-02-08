@@ -1,3 +1,11 @@
+<% @prices['DISPLAY'] %>
+
+<% @prices['DISPLAY'].each do |key, value| %>
+  <p><%= key %>: <%= value['USD']['PRICE'] %><br />
+  24H High: <%= value['USD']['HIGHDAY'] %> 24H Low: <%= value['USD']['LOWDAY'] %><br />
+  MarketCap: <%= value['USD']['MKTCAP'] %></p>
+<% end %>
+
 <div class="row">
     <% for news in @news['Data'] %>
     <div class="col-sm">
