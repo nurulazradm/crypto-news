@@ -1,16 +1,15 @@
-<h1>Hello Rails 6!</h1>
-
-<p>&nbsp;</p>
-
-<% for news in @news['Data'] %>
-  <ul class="list-unstyled">
-    <li class="media">
-      <%= image_tag news['imageurl'], class: 'mr-3', size: '128x128' %>
-      <div class="media-body">
-        <h5 class="mt-0"><%= news['title'] %></h5>
-        <%= news['body'] %>
-        <p class="text-right"><%= link_to 'read more...', news['url'], target: '_blank', class: 'btn btn-outline-primary btn-sm' %></p>
+<div class="row">
+    <% for news in @news['Data'] %>
+    <div class="col-sm">
+      <div class="card" style="width: 18rem;">
+        <%= image_tag news['imageurl'], class: 'card-img-top', alt: news['source'] %>
+        <div class="card-body">
+          <h5 class="card-title"><%= news['title'] %></h5>
+          <p class="card-text"><%= news['body'] %></p>
+          <%= link_to 'Read More', news['url'], target: '_blank', class: 'btn btn-primary' %>
+        </div>
       </div>
-    </li>
-  </ul>
-<% end %>
+      <br />
+    </div>
+    <% end %>
+</div>
