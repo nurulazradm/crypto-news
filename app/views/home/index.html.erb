@@ -2,4 +2,15 @@
 
 <p>&nbsp;</p>
 
-<%= @news %>
+<% for news in @news['Data'] %>
+  <ul class="list-unstyled">
+    <li class="media">
+      <%= image_tag news['imageurl'], class: 'mr-3', size: '128x128' %>
+      <div class="media-body">
+        <h5 class="mt-0"><%= news['title'] %></h5>
+        <%= news['body'] %>
+        <p class="text-right"><%= link_to 'read more...', news['url'], target: '_blank', class: 'btn btn-outline-primary btn-sm' %></p>
+      </div>
+    </li>
+  </ul>
+<% end %>
