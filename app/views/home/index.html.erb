@@ -1,10 +1,27 @@
 <% @prices['DISPLAY'] %>
 
-<% @prices['DISPLAY'].each do |key, value| %>
-  <p><%= key %>: <%= value['USD']['PRICE'] %><br />
-  24H High: <%= value['USD']['HIGHDAY'] %> 24H Low: <%= value['USD']['LOWDAY'] %><br />
-  MarketCap: <%= value['USD']['MKTCAP'] %></p>
-<% end %>
+<table class="table table-sm table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">24hr High</th>
+      <th scope="col">24hr Low</th>
+      <th scope="col">Market Cap</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @prices['DISPLAY'].each do |key, value| %>
+    <tr>
+      <td><%= key %></td>
+      <td><%= value['USD']['PRICE'] %></td>
+      <td><%= value['USD']['HIGHDAY'] %></td>
+      <td><%= value['USD']['LOWDAY'] %></td>
+      <td><%= value['USD']['MKTCAP'] %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <div class="row">
     <% for news in @news['Data'] %>
@@ -13,7 +30,7 @@
         <%= image_tag news['imageurl'], class: 'card-img-top', alt: news['source'] %>
         <div class="card-body">
           <h5 class="card-title"><%= news['title'] %></h5>
-          <p class="card-text"><%= news['body'] %></p>
+          <p class="card-text"><%= news['body'].html_safe %></p>
           <%= link_to 'Read More', news['url'], target: '_blank', class: 'btn btn-primary' %>
         </div>
       </div>
