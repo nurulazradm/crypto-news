@@ -18,6 +18,6 @@ class HomeController < ApplicationController
   end
 
   def prices
-
+    @symbol = params[:symbol]
   end
 end
