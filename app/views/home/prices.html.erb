@@ -1,12 +1,16 @@
 <h1>Get Prices</h1>
 
-<div class="jumbotron">
-  <h1 class="display-4"><%= @symbol %></h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>
-  Price: <%= @prices['DISPLAY'][@symbol]['USD']['PRICE'] %><br>
-  24hr High: <%= @prices['DISPLAY'][@symbol]['USD']['HIGHDAY'] %><br>
-  24hr Low: <%= @prices['DISPLAY'][@symbol]['USD']['LOWDAY'] %><br>
-  Market Cap: <%= @prices['DISPLAY'][@symbol]['USD']['MKTCAP'] %><br></p>
-</div>
+<% unless @symbol.nil? %>
+  <div class="jumbotron">
+    <h1 class="display-4"><%= @symbol %></h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <hr class="my-4">
+    <p>
+    Price: <%= @prices['DISPLAY'][@symbol]['USD']['PRICE'] %><br>
+    24hr High: <%= @prices['DISPLAY'][@symbol]['USD']['HIGHDAY'] %><br>
+    24hr Low: <%= @prices['DISPLAY'][@symbol]['USD']['LOWDAY'] %><br>
+    Market Cap: <%= @prices['DISPLAY'][@symbol]['USD']['MKTCAP'] %><br></p>
+  </div>
+<% else %>
+  <h4 class="alert alert-warning">Please enter a symbol</h4>
+<% end %>
