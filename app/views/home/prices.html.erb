@@ -1,16 +1,25 @@
-<h1>Get Prices</h1>
+<h1>Get price</h1>
 
-<% unless @symbol.nil? %>
-  <div class="jumbotron">
-    <h1 class="display-4"><%= @symbol %></h1>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-    <hr class="my-4">
-    <p>
-    Price: <%= @prices['DISPLAY'][@symbol]['USD']['PRICE'] %><br>
-    24hr High: <%= @prices['DISPLAY'][@symbol]['USD']['HIGHDAY'] %><br>
-    24hr Low: <%= @prices['DISPLAY'][@symbol]['USD']['LOWDAY'] %><br>
-    Market Cap: <%= @prices['DISPLAY'][@symbol]['USD']['MKTCAP'] %><br></p>
-  </div>
+<% if @symbol %>
+  <% if @price['Response'] == 'Error' %>
+    <div class="alert alert-warning" role="alert">
+      <%= @price['Warning'] %>
+    </div>
+  <% else %>
+    <div class="jumbotron">
+      <h1 class="display-4">
+        <%= image_tag "https://www.cryptocompare.com#{@price['DISPLAY'][@symbol]['USD']['IMAGEURL']}", alt: @price['DISPLAY'][@symbol]['USD']['FROMSYMBOL'], size: '64x64' %>
+        <%= @symbol %>
+      </h1>
+      <p>
+      Price: <%= @price['DISPLAY'][@symbol]['USD']['PRICE'] %><br>
+      24hr High: <%= @price['DISPLAY'][@symbol]['USD']['HIGHDAY'] %><br>
+      24hr Low: <%= @price['DISPLAY'][@symbol]['USD']['LOWDAY'] %><br>
+      Market Cap: <%= @price['DISPLAY'][@symbol]['USD']['MKTCAP'] %><br></p>
+    </div>
+  <% end %>
 <% else %>
   <h4 class="alert alert-warning">Please enter a symbol</h4>
 <% end %>
+
+<% @price %>
