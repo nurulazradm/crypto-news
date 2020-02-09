@@ -18,6 +18,12 @@ class HomeController < ApplicationController
   end
 
   def prices
-    @symbol = params[:symbol]
+    @symbol = params[:symbol].upcase
+
+    # Grab Price
+    symbol_url = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=' + @symbol + '&tsyms=USD'
+    symbol_uri = URI(symbol_url)
+    symbol_response = Net::HTTP.get symbol_uri
+    @prices = JSON.parse symbol_response
   end
 end
