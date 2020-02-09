@@ -1,31 +1,21 @@
 class HomeController < ApplicationController
   def index
-    require 'net/http'
-    require 'json'
-
     # Grab News
-    url = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN'
-    uri = URI(url)
-    response = Net::HTTP.get uri
-    @news = JSON.parse response
+    cc = CryptoCompare.new
+    @news = cc.news
 
-    # Grab Price
-    price_url = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,MCO,EVN,NEO&tsyms=USD'
-    price_uri = URI(price_url)
-    price_response = Net::HTTP.get price_uri
-    @prices = JSON.parse price_response
-
+    # Grab Volume
+    cc = CryptoCompare.new
+    @volumes = cc.totalvolfull
   end
 
   def prices
-    @symbol = params[:symbol].upcase unless params[:symbol].nil?
+    @symbol = params[:symbol].upcase unless params[:symbol].nil? || params[:symbol].empty?
 
     # Grab Price
     if @symbol
-      symbol_url = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=' + @symbol + '&tsyms=USD'
-      symbol_uri = URI(symbol_url)
-      symbol_response = Net::HTTP.get symbol_uri
-      @price = JSON.parse symbol_response
+      cc = CryptoCompare.new
+      @price = cc.pricemultifull(@symbol)
     end
   end
 end

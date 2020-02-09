@@ -1,4 +1,3 @@
-<% @prices['DISPLAY'] %>
 
 <table class="table table-sm table-striped table-bordered table-hover">
   <thead class="thead-dark">
@@ -11,14 +10,16 @@
     </tr>
   </thead>
   <tbody>
-    <% @prices['DISPLAY'].each do |key, value| %>
-    <tr>
-      <td><%= key %></td>
-      <td><%= value['USD']['PRICE'] %></td>
-      <td><%= value['USD']['HIGHDAY'] %></td>
-      <td><%= value['USD']['LOWDAY'] %></td>
-      <td><%= value['USD']['MKTCAP'] %></td>
-    </tr>
+    <% @volumes['Data'].each do |index| %>
+      <% index['DISPLAY'].each do |display, tsym| %>
+      <tr>
+        <td><%= image_tag "https://www.cryptocompare.com#{tsym['IMAGEURL']}", alt: tsym['FROMSYMBOL'], size: '24x24' %></td>
+        <td><%= tsym['PRICE'] %></td>
+        <td><%= tsym['HIGH24HOUR'] %></td>
+        <td><%= tsym['LOW24HOUR'] %></td>
+        <td><%= tsym['MKTCAP'] %></td>
+      </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
